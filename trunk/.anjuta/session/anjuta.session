@@ -3,6 +3,9 @@
 Maximized=1
 Geometry=1674x974+6+6
 
+[File Loader]
+Files=file:///home/rush/3dtut/tut6.txt#77%%%file:///home/rush/Projects/libDataStruct/src/Vertex.h#25%%%file:///home/rush/Projects/libDataStruct/include/KDTree.h#1%%%file:///home/rush/Projects/libDataStruct/configure.ac#4%%%file:///home/rush/Projects/libDataStruct/include/Makefile.am#17%%%file:///home/rush/Projects/libDataStruct/libDataStruct.pc.in#10%%%file:///home/rush/Projects/libDataStruct/Makefile.am#2
+
 [Execution]
 Program arguments=
 Program uri=
