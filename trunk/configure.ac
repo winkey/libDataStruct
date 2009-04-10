@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 dnl Created by Anjuta application wizard.
 
-AC_INIT(libdatastruct, 0.1)
+AC_INIT(libDataStruct, 0.1)
 
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 AM_CONFIG_HEADER(config.h)
@@ -28,5 +28,5 @@ AC_OUTPUT([
 Makefile
 include/Makefile
 src/Makefile
-
+libDataStruct.pc
 ])
