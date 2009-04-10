@@ -1,0 +1,10 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: LibDataStruct
+Description: Data structure library.
+Version: @VERSION@
+Libs: -L${libdir} -lDataStruct
+Cflags: -I${includedir}
