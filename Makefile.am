@@ -1,5 +1,5 @@
-## Process this file with automake to produce Makefile.in
-## Created by Anjuta
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = libDataStruct.pc
 
 SUBDIRS = src \
 	include

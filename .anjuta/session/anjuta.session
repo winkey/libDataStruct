@@ -1,10 +1,7 @@
 
 [Anjuta]
 Maximized=1
-Geometry=1674x972+6+6
-
-[File Loader]
-Files=file:///home/rush/3dtut/tut6.txt#77%%%file:///home/rush/Projects/libDataStruct/src/Vertex.h#25%%%file:///home/rush/Projects/libDataStruct/include/KDTree.h#1
+Geometry=1674x974+6+6
 
 [Execution]
 Program arguments=
