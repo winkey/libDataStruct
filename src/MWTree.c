@@ -105,9 +105,10 @@ MWTree_node *add(
 	/***** compare *****/
 	
 	int cmp = t->cmp(data, n->data);
-								
+	printf("cmp = %i\n", cmp);						
+
 	/***** if the new node is greater than the current node *****/
-	
+
 	if (cmp > 0) {
 		
 		/***** alocate memory for the node *****/
@@ -141,26 +142,9 @@ MWTree_node *add(
 		return new;
 	}
 		
-	/***** if the new node is equal to the current node *****/
-
-	else if (cmp == 0) {
-		return NULL; //fixme
-		/***** alocate memory for the node *****/
-		
-		if (!(new = calloc(1, sizeof(MWTree_node))))
-			return NULL;
-		
-		new->data = data;
-		new->parent = p;
-		t->length++;
-		DLList_append(&(p->children), new);
-		
-		return new;
-	}
-	
 	/***** if the new node is less than the node *****/
 	
-	else {
+	else if (cmp < 0) {
 
 		DLList_node *child = NULL;
 		
@@ -191,14 +175,14 @@ MWTree_node *add(
 			return new;
 		}
 	}
-			
-	/***** if we got here there is a problem *****/
-	printf("houston we have a problem\n");
+	
+	/***** if the new node is equal to the current node *****/
+
 	return NULL;
 }
 					
 /*******************************************************************************
-  function to add a node to a binary search tree
+  function to add a node to a multi way tree
   
   args:
         tree  the tree to add the node to
@@ -214,6 +198,7 @@ MWTree_node *MWTree_insert (
   MWTree *tree,
   void *data)
 {
+
 	
 	MWTree_node *new = add(tree, tree->root, NULL, data);
 	
