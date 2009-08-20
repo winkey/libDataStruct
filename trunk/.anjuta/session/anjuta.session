@@ -4,15 +4,18 @@ Maximized=1
 Geometry=1674x974+6+6
 
 [File Loader]
-Files=file:///home/rush/3dtut/tut6.txt#77%%%file:///home/rush/Projects/libDataStruct/src/Vertex.h#25%%%file:///home/rush/Projects/libDataStruct/include/KDTree.h#1%%%file:///home/rush/Projects/libDataStruct/configure.ac#4%%%file:///home/rush/Projects/libDataStruct/include/Makefile.am#17%%%file:///home/rush/Projects/libDataStruct/libDataStruct.pc.in#10%%%file:///home/rush/Projects/libDataStruct/Makefile.am#2
+Files=file:///home/rush/Projects/libDataStruct/src/MWTree.c#110
+
+[Document Manager]
+bookmarks=<?xml version="1.0" encoding="UTF-8"?>\n<bookmarks/>\n
 
 [Execution]
-Program arguments=
-Program uri=
 Run in terminal=2
-Working directories=
-Environment variables=
 
 [Build]
 Configuration list=1:Default:%%%1:Debug:Debug%%%1:Profiling:Profiling%%%1:Optimized:Optimized
 Selected Configuration=Default
+BuildArgs/Default=
+BuildArgs/Debug='CFLAGS=-g -O0' 'CXXFLAGS=-g -O0' 'JFLAGS=-g -O0' 'FFLAGS=-g -O0'
+BuildArgs/Profiling='CFLAGS=-g -pg' 'CXXFLAGS=-g -pg' 'JFLAGS=-g -pg' 'FFLAGS=-g -pg'
+BuildArgs/Optimized='CFLAGS=-O2' 'CXXFLAGS=-O2' 'JFLAGS=-O2' 'FFLAGS=-O2'
