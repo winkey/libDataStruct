@@ -105,7 +105,6 @@ MWTree_node *add(
 	/***** compare *****/
 	
 	int cmp = t->cmp(data, n->data);
-	printf("cmp = %i\n", cmp);						
 
 	/***** if the new node is greater than the current node *****/
 
