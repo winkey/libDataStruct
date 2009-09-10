@@ -21,6 +21,19 @@
 
 #include "../include/MWTree.h"
 
+
+void *levelorder (
+  MWTree *t,
+  MWTree_node *n,
+  int converse,
+  MWTree_traverse_function func,
+  void *extra);
+
+
+/*******************************************************************************
+  function to find a node in a multi way tree
+*******************************************************************************/
+
 MWTree_node *find(
   MWTree *t,
 	MWTree_node *n,
@@ -70,6 +83,25 @@ MWTree_node *MWTree_find(
 	
 }
 
+/*******************************************************************************
+	function to allocate and clear a new node
+*******************************************************************************/
+
+MWTree_node *newnode(void) {
+  
+  MWTree_node *new = NULL;
+
+  if ((new = malloc(sizeof(MWTree_node)))) {
+    new->parent = NULL;
+    new->children.length = 0;
+    new->children.head = NULL;
+    new->children.tail = NULL;
+    new->data = NULL;
+  }
+
+  return new;
+}
+
 
 /*******************************************************************************
 	function to add a new node to the tree
@@ -79,23 +111,26 @@ MWTree_node *add(
 	MWTree *t,
 	MWTree_node *n,
 	MWTree_node *p,
+  int add_on_zero,
 	void *data)
 {
 	MWTree_node *new = NULL;
 	
-	/***** if the node is null then our new node goes right here *****/
+	/***** if the node is null then our new node is the parents child *****/
 	
 	if (!n) {
 	
 		/***** alocate memory for the node *****/
 		
-		if (!(new = calloc(1, sizeof(MWTree_node))))
+		if (!(new = newnode()))
 			return NULL;
 		
 		new->data = data;
 		t->length++;
 		new->parent = p;
-		
+
+    /***** if there is a parent append, otherwise the nde is the root *****/
+    
 		if (p)
 			DLList_append(&p->children, new);
 		
@@ -112,72 +147,76 @@ MWTree_node *add(
 		
 		/***** alocate memory for the node *****/
 		
-		if (!(new = calloc(1, sizeof(MWTree_node))))
+		if (!(new = newnode()))
 			return NULL;
 		
 		new->data = data;
 		t->length++;
 		new->parent = p;
-		
-		if (!p)
+
+    /***** if theres no parent then the new node is the root *****/
+    
+		if (!p) {
 			t->root = new;
-		
-		else {
-			DLList_append(&(p->children), new);
+      printf("gotcha\n");
+    }
+    
+    /***** take the place of the current node *****/
+
+    else {
+
+      /***** go though the children of the parent node *****/
 			
-			/***** remove the node we replaced *****/
-			
-			DLList_node *oc = NULL;
-			for (oc = p->children.head ; oc ; oc = oc->next) {
-				if (oc->data == n) {
-					DLList_delete(&p->children, oc);
-					break;
-				}
+			DLList_node *c = NULL, *next = NULL; 
+			for (c = p->children.head ; c ; c = next) {
+        next = c->next;
+
+        MWTree_node *ctn = c->data;
+
+        /***** is the new node greater than the parents child node? *****/
+        
+        if (n == ctn || t->cmp(data, ctn->data) > 0) {
+
+          /***** move that child node to the new nodes children *****/
+
+          DLList_delete(&p->children, c);
+          DLList_append(&(new->children), ctn);
+          ctn->parent = new;
+        }
 			}
+    
+      /***** append the new node to the parent *****/
+    
+      DLList_append(&(p->children), new);
 		}
-		DLList_append(&(new->children), n);
-		
-		n->parent = new;
+
 		return new;
 	}
-		
-	/***** if the new node is less than the node *****/
-	
-	else if (cmp < 0) {
 
-		DLList_node *child = NULL;
-		
-		
-		if (!n->children.head) {
-			if ((new = add(t, NULL, n, data)))
+  /***** if the new node is less than the current node *****/
+
+  else if (cmp < 0) {
+    
+    /***** parse the nodes children *****/
+    
+    DLList_node *c = NULL;
+    for (c = n->children.head ; c ; c = c->next) {
+      
+			if ((new = add(t, c->data, n, 0, data)))
 				return new;
-		}
-		
-		else {
-			for (child = n->children.head ; child ; child = child->next) {
-				MWTree_node *c = child->data;
-			
-				if ((new = add(t, c, n, data)))
-					return new;
-			}
-			
-			/***** alocate memory for the node *****/
-		
-			if (!(new = calloc(1, sizeof(MWTree_node))))
-				return NULL;
-		
-			new->data = data;
-			new->parent = n;
-			t->length++;
-			DLList_append(&(n->children), new);
-			
-			return new;
-		}
-	}
-	
-	/***** if the new node is equal to the current node *****/
+    }
 
-	return NULL;
+		if ((new = add(t, NULL, n, cmp, data)))
+			return new;
+
+  }
+
+  else if (add_on_zero) {
+		if ((new = add(t, NULL, n, cmp, data)))
+			return new;
+  }
+
+  return NULL;
 }
 					
 /*******************************************************************************
@@ -198,10 +237,15 @@ MWTree_node *MWTree_insert (
   void *data)
 {
 
+	printf("MWTree_insert\n");
+	MWTree_node *new = add(tree, tree->root, NULL, 0, data);
 	
-	MWTree_node *new = add(tree, tree->root, NULL, data);
-	
-	/***** if the tree is empty we have our first node *****/
+	/***** if the tree is empty we have our first node *void *levelorder (
+  MWTree *t,
+  MWTree_node *n,
+  int converse,
+  MWTree_traverse_function func,
+  void *extra)****/
 	
 	if (!tree->root)
 		tree->root = new;
