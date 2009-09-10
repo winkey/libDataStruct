@@ -158,7 +158,6 @@ MWTree_node *add(
     
 		if (!p) {
 			t->root = new;
-      printf("gotcha\n");
     }
     
     /***** take the place of the current node *****/
@@ -237,7 +236,6 @@ MWTree_node *MWTree_insert (
   void *data)
 {
 
-	printf("MWTree_insert\n");
 	MWTree_node *new = add(tree, tree->root, NULL, 0, data);
 	
 	/***** if the tree is empty we have our first node *void *levelorder (
