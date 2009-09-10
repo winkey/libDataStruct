@@ -4,7 +4,7 @@ Maximized=1
 Geometry=1674x974+6+6
 
 [File Loader]
-Files=file:///home/rush/Projects/libDataStruct/src/MWTree.c#110
+Files=file:///home/rush/Projects/libDataStruct/src/MWTree.c#651%%%file:///home/rush/Projects/libDataStruct/include/MWTree.h#29%%%file:///home/rush/Projects/libDataStruct/include/DLList.h#24
 
 [Document Manager]
 bookmarks=<?xml version="1.0" encoding="UTF-8"?>\n<bookmarks/>\n
